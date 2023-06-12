@@ -14,7 +14,7 @@ Includes
 #include "stdlib.h"
 
 #include "xALG_FX_Tremolo.h"
-#include "xALG_WSOLA_pitch_shift2.h"//ZykeeAdd
+#include "ZykeePitchShiftFFT.h"//ZykeeAdd
 #include "fftw3.h"
 
 float parm[10] = {50,50,50,50,50,50,50,50,50,50};
@@ -78,7 +78,7 @@ void xALG_Basic_Deal(float* InputR , float* InputL , float* Output_R , float* Ou
 
 /*
 *********************************************************************************************************************
-@ Brief  : 左右声道交替
+@ Brief  : 直接输入单声道数据进行处理//ZykeeChanged 2023.6.10
 
 @ Param  : NONE
 
@@ -95,7 +95,7 @@ void Input_BufferChange(float* Input_r , float* Input_l , float* Output , uint32
 }
 /*
 *********************************************************************************************************************
-@ Brief  : 左右声道分开
+@ Brief  : 读取单声道数据还原成双声道 //ZykeeChanged 2023.6.10
 
 @ Param  : NONE
 
