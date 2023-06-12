@@ -6,7 +6,26 @@
 #include "ZykeePitchShiftFFT.h"
 #include "assert.h"
 #include "fftw3.h"
+/*
+*********************************************************************************************************************
+@ Brief  : PitchShifting Algorithm using STFT
+        "First Init Func then PitchShift Func,which doesn`t include a Uninit Func.May cause memory leak.To be improved."
+@ Param  : double pitchShift:Inited Func(Zy.rate)
+          long numSampsToProcess:your Samples
+          long fftFrameSize(win_len:Defined in ZykeePitchShiftFFT.h)
+          long osamp(usually 4 or larger to Ensure sound quality,overlap numbers)
+          float sampleRate:Inited Func(Zy.SampleRate)
+          SAMPLETYPE* indata(pointers to indata)
+          SAMPLETYPE* outdata(pointers to outdata)
+          struct ZykeeFourier* Zy:SEE ZykeePitchShiftFFT.h
 
+@ Return :NONE
+
+@ Author : ZykeeLu(QQ:2720229295)
+
+@ Data   : 2022-6-12
+*********************************************************************************************************************
+*/
 
 void ZykeePitchShiftInit(struct ZykeeFourier* Zy,double pitch)
 {
@@ -32,6 +51,7 @@ void ZykeePitchShift(double pitchShift, long numSampsToProcess, long fftFrameSiz
     double magn, phase, tmp, window, real, imag;
     double freqPerBin, expct;
     long i, k, qpd, index, inFifoLatency, stepSize, fftFrameSize2;
+    assert(Zy->gInit == TRUE);
     fftw_complex* fft_in, * fft_out;
     fftw_plan fft, ifft;
     fft_in = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * win_len);
