@@ -24,6 +24,7 @@ void ZykeePitchShiftInit(struct ZykeeFourier* Zy,double pitch)
     Zy->gInit = TRUE;
     Zy->rate = exp(0.69314718056 * (pitch / 12.0));
     Zy->tempo = 1 / Zy->rate;
+    Zy->sampleRate = 44100;
 }
 
 void ZykeePitchShift(double pitchShift, long numSampsToProcess, long fftFrameSize, long osamp, float sampleRate, SAMPLETYPE* indata, SAMPLETYPE* outdata, struct ZykeeFourier* Zy)
